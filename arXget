@@ -1,0 +1,16 @@
+#This script takes arXiv numbers of the form YYMM.number and downloads that
+# parper from arXiv into a directory corresponding to the current month. You
+# can give multiple files and they will be downloaded sequentially.
+
+#!/bin/bash
+CURRENT_MONTH=$(date '+%b%Y');
+DL_DIR="$HOME/documents/articles/$CURRENT_MONTH/";
+
+for var in "$@"
+do
+  mkdir -p "$DL_DIR"
+  ARTICLE_TITLE=$(curl "https://arxiv.org/abs/$var" -so - | grep -iPo -m 1 '(?<=<title>)(.*)(?=</title>)')
+  curl -s --output "$DL_DIR$ARTICLE_TITLE.pdf" "https://arxiv.org/pdf/$var.pdf"
+  echo "Downloaded file $ARTICLE_TITLE into $DL_DIR"
+done
+echo "Done!"
