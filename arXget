@@ -3,7 +3,7 @@
 # can give multiple files and they will be downloaded sequentially.
 
 #!/bin/bash
-CURRENT_MONTH=$(date '+%b%Y');
+CURRENT_MONTH=$(date '+%Y%b');
 
 
 DL_DIR="$HOME/documents/articles/$CURRENT_MONTH/";
@@ -25,7 +25,7 @@ do
 
 
   mkdir -p "$DL_DIR"
-  ARTICLE_TITLE=$(curl "https://arxiv.org/abs/$identifier" -so - | grep -iPo -m 1 '(?<=<title>)(.*)(?=</title>)')
+  ARTICLE_TITLE=$(curl "https://arxiv.org/abs/$identifier" -so - | grep -iPo -m 1 '(?<=<title>)(.*)(?=</title>)' | tr '[]' '()')
   ARTICLE_TITLE_NO_SLASH="$(echo $ARTICLE_TITLE | tr / -)"
   curl -s --output "$DL_DIR$ARTICLE_TITLE_NO_SLASH.pdf" "https://arxiv.org/pdf/$identifier.pdf"
   echo "Downloaded file $ARTICLE_TITLE_NO_SLASH into $DL_DIR"
