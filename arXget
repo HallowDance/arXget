@@ -3,7 +3,7 @@
 # can give multiple files and they will be downloaded sequentially.
 
 #!/bin/bash
-CURRENT_MONTH=$(date '+%Y%b');
+CURRENT_MONTH=$(date '+%b');
 
 
 DL_DIR="$HOME/documents/articles/$CURRENT_MONTH/";
