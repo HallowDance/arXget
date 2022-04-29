@@ -3,6 +3,10 @@
 # can give multiple files and they will be downloaded sequentially.
 
 #!/bin/bash
+
+#english locale for portability
+export LC_ALL=en_GB.utf8
+
 CURRENT_MONTH=$(date '+%b');
 
 
